@@ -10,7 +10,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Hero } from './hero';
-
+import { Power } from './power';
 import { MessageService } from './message.service';
 
 // new for HTTP
@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class HeroService {
 
-  //constructor(private messageService: MessageService) { }
+  // constructor(private messageService: MessageService) { }
   constructor(
     private http: HttpClient, private messageService: MessageService) { }
 
@@ -29,33 +29,31 @@ export class HeroService {
   getHeroes(): Observable<Hero[]> {                                     // an array of them
     return  this.http.get<Hero[]>('http://localhost:3000/heroes');  
      this.messageService.add('HeroService: fetched heroes');
-    //return  this.http.get<Hero[]>(' https://kurtmongoserver.azurewebsites.net/heros/');
+    // return  this.http.get<Hero[]>(' https://kurtmongoserver.azurewebsites.net/heros/');
   }
   getHero(id: number): Observable<Hero> {                        // one of them
     return this.http.get<Hero>('http://localhost:3000/heroes/' + id);
-    //return this.http.get<Hero>('https://kurtmongoserver.azurewebsites.net/tasks/' + taskName);
+    // return this.http.get<Hero>('https://kurtmongoserver.azurewebsites.net/tasks/' + taskName);
   }
-
+  getPowers(): Observable<Power[]> {                                     // an array of them
+    return  this.http.get<Power[]>('http://localhost:3000/powers');
+     this.messageService.add('HeroService: fetched powers');
+    // return  this.http.get<Hero[]>(' https://kurtmongoserver.azurewebsites.net/heros/');
+  }
 
 
   updateHero(hero: Hero): Observable<void> {
   return this.http.put<void>('http://localhost:3000/heroes/' + hero.id,  hero);
-  //return this.http.put<void>('https://kurtmongoserver.azurewebsites.net/tasks/' + task._id, task);
+  // return this.http.put<void>('https://kurtmongoserver.azurewebsites.net/tasks/' + task._id, task);
   }
 
   deleteHero(hero: Hero) {
     return this.http.delete('http://localhost:3000/heroes/' + hero.id);
-    //return this.http.delete('https://kurtmongoserver.azurewebsites.net/heroes/' + hero.id);
+    // return this.http.delete('https://kurtmongoserver.azurewebsites.net/heroes/' + hero.id);
   }
 
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>('http://localhost:3000/heroes/', hero);  // passed in body object
-    //return this.http.post<Task>('https://kurtmongoserver.azurewebsites.net/heroes/', hero);
+    // return this.http.post<Task>('https://kurtmongoserver.azurewebsites.net/heroes/', hero);
   }
-
-  
-
-
-
-
 }
