@@ -1,14 +1,9 @@
-<h1>Powers</h1>
-<div *ngFor="let power of powers">
-  <h4>{{ power.power }}</h4>
-  &nbsp; &nbsp;
-  <ng-container>
-    <ul *ngFor="let hero of heroes">
-      <li>
-        <a routerLink="/detail/{{ hero.id }}">
-          <span>{{ hero.name }}</span>
-        </a>
-      </li>
-    </ul>
-  </ng-container>
+<h2>Heroes by Power</h2>
+<div class="hero_power" *ngFor="let entry of heroesByPower | keyvalue">
+  <h3>{{entry.key}}</h3>
+  <ul>
+    <li *ngFor="let hero of entry.value">
+      {{hero.name}}
+    </li>
+  </ul>
 </div>

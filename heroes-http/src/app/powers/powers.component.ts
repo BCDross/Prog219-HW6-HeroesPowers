@@ -8,23 +8,29 @@ import { HeroService } from '../hero.service';
   templateUrl: './powers.component.html',
   styleUrls: ['./powers.component.scss'],
 })
-export class PowersComponent implements OnInit {
-  powers: Power[] = [];
 
-  heroes: Hero[] = [];
+export class PowersComponent implements OnInit {
+
+  // This creates a map object data struct. This takes in a string and an array of Heros 
+  heroesByPower: Map<string,Hero[]> = new Map();
+
   constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
-    this.getPowers();
-    this.getHeroes();
-  }
+    this.heroService.getHeroes().subscribe(heroes => {
+      for (var hero of heroes) {
+        let powerList = this.heroesByPower.get(hero.power);
+        if (powerList === undefined) {
+          powerList = [];
+          this.heroesByPower.set(hero.power, powerList);
+        }
+        powerList.push(hero);
+      }
 
-  getPowers(): void {
-    this.heroService.getPowers().subscribe((powers) => (this.powers = powers));
+      for (let power of this.heroesByPower.keys()) {
+        let powerList = this.heroesByPower.get(power);
+        powerList.sort((a, b) => a.name.localeCompare(b.name))
+      }
+    });
   }
-
-  getHeroes(): void {
-    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
-  }
-
 }

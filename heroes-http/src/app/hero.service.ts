@@ -35,11 +35,14 @@ export class HeroService {
     return this.http.get<Hero>('http://localhost:3000/heroes/' + id);
     // return this.http.get<Hero>('https://kurtmongoserver.azurewebsites.net/tasks/' + taskName);
   }
-  getPowers(): Observable<Power[]> {                                     // an array of them
-    return  this.http.get<Power[]>('http://localhost:3000/powers');
-     this.messageService.add('HeroService: fetched powers');
-    // return  this.http.get<Hero[]>(' https://kurtmongoserver.azurewebsites.net/heros/');
-  }
+
+  // This is part of my original way to display the heroes by power.
+
+  // getPowers(): Observable<Power[]> {                                     // an array of them
+  //   return  this.http.get<Power[]>('http://localhost:3000/powers');
+  //    this.messageService.add('HeroService: fetched powers');
+  //   // return  this.http.get<Hero[]>(' https://kurtmongoserver.azurewebsites.net/heros/');
+  //}
 
 
   updateHero(hero: Hero): Observable<void> {
@@ -54,6 +57,6 @@ export class HeroService {
 
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>('http://localhost:3000/heroes/', hero);  // passed in body object
-    // return this.http.post<Task>('https://kurtmongoserver.azurewebsites.net/heroes/', hero);
+     // return this.http.post<Task>('https://kurtmongoserver.azurewebsites.net/heroes/', hero);
   }
 }

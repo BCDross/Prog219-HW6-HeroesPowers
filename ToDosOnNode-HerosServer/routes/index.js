@@ -66,25 +66,27 @@ router.get("/heroes/:id", function (req, res) {
   }
 });
 
-router.get("/powers", function (req, res) {
-  fileManager.read();
-  console.log(heroArray);
-  powerArray = [];
-  let tempPowers = [];
-  let uniquePowers = [];
-  for (var i = 0; i < heroArray.length; i++){
-    tempPowers.push(heroArray[i].power);
-  };
+// I think this would work somehow but I could not get to where it would work.
 
-  uniquePowers = new Set(tempPowers);
-  for (let power of uniquePowers){
-    powerArray.push(new Power(power));
-  }
-  console.log("powerArray List");
-  console.log(powerArray);
+// router.get("/powers", function (req, res) {
+//   fileManager.read();
+//   console.log(heroArray);
+//   powerArray = [];
+//   let tempPowers = [];
+//   let uniquePowers = [];
+//   for (var i = 0; i < heroArray.length; i++){
+//     tempPowers.push(heroArray[i].power);
+//   };
+
+//   uniquePowers = new Set(tempPowers);
+//   for (let power of uniquePowers){
+//     powerArray.push(new Power(power));
+//   }
+//   console.log("powerArray List");
+//   console.log(powerArray);
   
-  res.status(200).json(powerArray);
-});
+//   res.status(200).json(powerArray);
+// });
 
 router.put("/heroes/:id", function (req, res) {
   var changedHero = req.body;
